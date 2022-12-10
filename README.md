@@ -21,3 +21,5 @@ password=lol123
 For linux, an alternate copy to clipboard command is to use `xsel` or `xclip`
 and replacing the current copy command with said commands.
 
+## Reference
+https://github.com/acheong08/ChatGPT
