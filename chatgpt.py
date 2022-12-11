@@ -8,7 +8,7 @@ import re
 dotenv.load_dotenv()
 
 args = sys.argv[1]
-args = "Write a one line bash command for: " + args
+args = "Write a one line bash command for this task: " + args
 copy_command = "pbcopy"
 
 email = os.getenv("email")
@@ -18,12 +18,13 @@ password = os.getenv("password")
 chat = Chat(email, password)
 answer, previous_convo_id, convo_id = chat.ask(args)
 
-try:
 	# regex to get the one line bash command between the ``` and ```
-	answer = re.search(r"(```\n)(.*)(\n```)", answer).group(2)
-except:
-	print("Error parsing answer", answer)
+test = re.search(r"(```\n)(.*)(\n```)", answer)
+if test:
+	answer = test.group(2)
+	print("Copied to clipboard:  " + answer)
+else:
+	print(f"Could not Parse answer:   \n{'-'*50}\n{answer}\n{'-'*50}")
 
 subprocess.run(copy_command, text=True, input=answer)
-print("Copied to clipboard: " + answer)
 
