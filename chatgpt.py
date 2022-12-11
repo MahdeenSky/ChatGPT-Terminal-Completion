@@ -3,22 +3,27 @@ import sys
 import subprocess
 import dotenv
 import os
+import re
 
 dotenv.load_dotenv()
 
 args = sys.argv[1]
 args = "Write a one line bash command for: " + args
+copy_command = "pbcopy"
+
+email = os.getenv("email")
+password = os.getenv("password")
 
 # Initializing the chat class will automatically log you in, check access_tokens
-chat = Chat(email=os.getenv("email"), password=os.getenv("password"))
-answer = chat.ask(args)
+chat = Chat(email, password)
+answer, previous_convo_id, convo_id = chat.ask(args)
 
-# parsing input to only get the command within ```
 try:
-	answer = answer.split("```")[1].strip()
+	# regex to get the one line bash command between the ``` and ```
+	answer = re.search(r"(```\n)(.*)(\n```)", answer).group(2)
 except:
-	answer  = answer.split("\n")[-1].strip()
+	print("Error parsing answer", answer)
 
-subprocess.run("pbcopy", text=True, input=answer)
+subprocess.run(copy_command, text=True, input=answer)
 print("Copied to clipboard: " + answer)
 
