@@ -18,7 +18,7 @@ Implements `how` command for querying ChatGPT.
 export EMAIL=email_chatgpt
 export PWD=your_password
 git clone git@github.com:MahdeenSky/ChatGPT-Terminal-Completion.git ~/.chatgpt_completion
-cd ~/.chatgpt_comlettion
+cd ~/.chatgpt_completion
 pip3 install -r requirements.txt
 cat script.sh|sed -r "s|\"Directory of the script\"|`pwd`|g" >>~/.${SHELL##*/}rc
 echo "email=${EMAIL}" >> .env
