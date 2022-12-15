@@ -14,7 +14,8 @@ Implements `how` command for querying ChatGPT.
 4. Make a new .env file in the python file directory with your email and password formatted like
 5. That should be everything
 
-``` export EMAIL=email_chatgpt
+``` 
+export EMAIL=email_chatgpt
 export PWD=your_password
 git clone git@github.com:MahdeenSky/ChatGPT-Terminal-Completion.git ~/.chatgpt_completion
 cd ~/.chatgpt_comlettion
